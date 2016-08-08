@@ -1,0 +1,24 @@
+//Source code by Andreas Kretz
+
+//Create a class for a single row
+case class Allcolumns(Time : String, User : String, Text : String){
+    //This is a spilt method to get from a text to single words
+    def mysplit(s: Allcolumns): Array[Allcolumns] = { 
+       
+       var singlewords : Array[String] = Text.split(" ");
+       var ex_array : Array[Allcolumns] = new Array[Allcolumns](singlewords.length);
+        
+        for(i <- 0 until singlewords.length){
+            ex_array(i) = Allcolumns(Time,User,singlewords(i));
+        }
+        
+        return ex_array }
+}
+
+val sourceText = sc.textFile("/Users/andkre/Documents/TwitchAnalysis/2015-10-17/Twitchchat_anonymized.txt")
+
+val fullchat = sourceText.map(s=>s.split(",")).map(s=>Allcolumns(s(0).drop(11).take(5),s(2),s(3)))
+val wordcount = fullchat.flatMap(line => line.mysplit(line))
+
+wordcount.toDF().registerTempTable("wordcount")
+fullchat.toDF().registerTempTable("fullchat")

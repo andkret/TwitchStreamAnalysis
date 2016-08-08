@@ -1,0 +1,35 @@
+//——— FINDINGS FROM BLOG POST EXAMPLE ————
+
+//Display Fullchat
+%sql select * from fullchat
+
+//Display Wordcount
+%sql select * from wordcount
+
+//Chat Activity / Highlights
+%sql select Time, count(*) as Messages from fullchat group by Time order by Time asc
+
+//Chat Indicates Winning At 18:23
+%sql select Time, count(Text) as ct, Text from wordcount 
+where Time like "18:23" group by Text,Time order by ct desc limit 5
+
+//Chat Indicates Losing At 19:02
+%sql select Time, count(Text) as ct, Text from wordcount
+where Time like "19:02" group by Text,Time order by ct desc limit 5
+
+
+
+//——— ADDITIONAL FINDINGS NOT IN BLOG POST ————
+
+//Most Active Chat Users
+%sql select count(User) as ct, User 
+from fullchat group by User order by ct desc
+
+//Specific User Activity By Minute
+%sql select Time, count(*) as Messages from fullchat 
+where User = 'thexxx' 
+group by Time,User 
+order by Time asc
+
+//Most Used Emotes In Chat
+%sql select Text, count(Text) as count from wordcount where Text like "lirik%" group by Text order by count desc limit 10
