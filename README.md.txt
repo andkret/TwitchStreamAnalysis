@@ -1,9 +1,9 @@
 Twitch Stream Analysls Readme
 
-This is the repository for my personal project to analyse Twitch stream data
+This is the repository of my blog post: How everybody can harvest the power of data mining
 
 It includes:
 
-- Java code to acquire the chat messages from Twitche’s IRC client 
-- Java code to acquire the viewer stats from Twitche’s public api client 
-- Spark code to analyse the data
+- Twitch chat log file
+- Apache Zeppelin Spark source code
+- Apache Zeppelin SparKSQL code for data exploration
